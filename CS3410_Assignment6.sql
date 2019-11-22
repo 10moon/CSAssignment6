@@ -9,13 +9,17 @@ CREATE TABLE Employee(
 	SSN varchar(255),
 	EmployeeName varchar(255),
 	Address varchar(255),
-	Address varchar(255),
 	Salary int,
 	DoB date,
+	WorksFor varchar(255),
+	Manages varchar(255),
+	Supervisor int,
+	Supervisee int,
 	PRIMARY KEY( SSN )
 	FOREIGN KEY (WorksFor) REFERENCES USER (DepartmentName)
 	FOREIGN KEY (Manages) REFERENCES USER (DepartmentName)
-	FOREIGN KEY (Supervises) REFERENCES USER (SSN)
+	FOREIGN KEY (Supervisor) REFERENCES USER (SSN)
+	FOREIGN KEY (Supervisee) REFERENCES USER (SSN)
 );
 
 CREATE TABLE Department(
@@ -27,25 +31,82 @@ CREATE TABLE Department(
 
 CREATE TABLE Location(
 	Location varchar(255),
-	DepartmentName varchar(255), -- TODO this is a foreign key
-	DepartmentNumber int, -- TODO this is a foreign key
+	DepartmentName varchar(255),
+	DepartmentNumber int,
+	FOREIGN KEY (DepartmentName) REFERENCES USER (DepartmentName)
+	FOREIGN KEY (DepartmentNumber) REFERENCES USER (DepartmentNumber)
 );
 
 CREATE TABLE Projects(
 	ProjectName varchar(255),
 	ProjectNumber int,
 	Location varchar(255),
-	DepartmentName varchar(255), -- TODO this is a foreign key
-	DepartmentNumber int -- TODO this is a foreign key
+	DepartmentName varchar(255),
+	DepartmentNumber int
+	FOREIGN KEY (DepartmentName) REFERENCES USER (DepartmentName)
+	FOREIGN KEY (DepartmentNumber) REFERENCES USER (DepartmentNumber)
+	PRIMARY KEY (ProjectName, ProjectNumber)
 );
 
 CREATE TABLE Dependant(
-	DependantName ,
-	Sex ,
-	DoB ,
-	Relationship ,
-	EmployeeSSN, -- TODO this is a foreign key
+	DependantName varchar(255),
+	Sex varchar(255),
+	DoB date,
+	Relationship varchar(255),
+	DependantOf varchar(255), 
 	PRIMARY KEY( DependantName, EmployeeName )
+	FOREIGN KEY (DependantOf) REFERENCES USER (SSN)
 );
+
+CREATE TABLE Manager (
+	ManagerID int NOT NULL AUTO_INCREMENT,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    FOREIGN KEY (ManagerID) REFERENCES USER (SSN)
+);
+
+CREATE TABLE WorksOn(
+	ProjectID int NOT NULL AUTO_INCREMENT,
+	Hours int,
+	WeeksWorkedOn int,
+	FOREIGN KEY (ProjectID) REFERENCES USER (ProjectName)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
