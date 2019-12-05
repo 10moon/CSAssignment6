@@ -82,4 +82,4 @@ INSERT INTO Manager (FirstName, LastName, StartDate)
 		('Damien', 'Stagsman', '2016-04-04'),
 		('Jakob', 'Jackson', '2017-01-09'),
 		('Maddie', 'Slye', '2017-11-13'),
-		('Tony', 'Gonzales', '2019-02-25')
+		('Tony', 'Gonzales', '2019-02-25');
